@@ -1,11 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import GuessResults from './components/GuessResults'
 
 function App() {
 
 const [guess, setGuess] = useState('')
+const [guesses, setGuesses] = useState<string[]>([])
 
 const handleSubmit = (e: FormEvent) => {
   e.preventDefault()
+  setGuesses([...guesses, guess])
   console.log({guess})
   setGuess('')
 }
@@ -27,6 +30,7 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
           value={guess}
           onChange={handleChange}/>
       </form>
+      <GuessResults guesses={guesses}/>
     </>
   )
 }
